@@ -1,0 +1,25 @@
+name: ${DOCKER_PROJECT_NAME}
+
+networks:
+  proxy:
+    name: ${DOCKER_PROXY_NETWORK}
+    external: true
+
+services:
+  server:
+    image: node:lts-slim
+    tty: true
+    volumes:
+      - type: bind
+        source: .
+        target: ${DOCKER_WORKDIR}
+    networks:
+      - proxy
+    working_dir: ${DOCKER_WORKDIR}
+    entrypoint: ['npm', 'run', 'dev']
+    environment:
+      NEXT_TELEMETRY_DISABLED: 1
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${DOCKER_PROJECT_NAME}.rule=Host(`${DOCKER_PROJECT_NAME}.localhost`)
+      - traefik.http.services.${DOCKER_PROJECT_NAME}.loadbalancer.server.port=3000
