@@ -1,3 +1,6 @@
+import portfolio from '../../public/portfolio.json';
+import Card from '../components/Card';
+
 export default function Page() {
   return (
     <div className="container max-w-screen-sm mx-auto my-8 whitespace-pre-line">
@@ -23,6 +26,14 @@ export default function Page() {
           </a>
         </h3>
       </header>
+
+      <ul>
+        {portfolio.map((project) => (
+          <li key={project.title} className="m-8">
+            <Card {...project} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
