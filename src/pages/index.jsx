@@ -9,7 +9,7 @@ export default function Page() {
         <h2 className="text-xl text-center font-bold">
           JavaScript and Cloud Developer
         </h2>
-        <h3 className="text-center text-s">
+        <h3 className="text-center text-sm">
           Los Angeles, California
           <span className="px-4">|</span>
           <a

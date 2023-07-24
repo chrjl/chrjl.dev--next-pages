@@ -4,36 +4,56 @@ export default function Card(props: CardProps) {
   const { title, description, tags, links } = props;
 
   return (
-    <div className="flex flex-col border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
-      <a href={links.target} className="block mb-4">
-        <h1 className="uppercase font-bold">{title + ' ->'}</h1>
-
-        {tags && (
-          <ul>
-            {tags.map((tag, index) => (
-              <li
-                key={index}
-                className="inline-block uppercase text-xs font-light mr-3 last:mr-0"
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {description && (
-          <div className="mt-4 text-sm font-sans">
-            {description.split('\n').map((p, index) => (
-              <p key={index} className="mt-2">
-                {p}
-              </p>
-            ))}
+    <div className="group border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
+      {links.target ? (
+        <a href={links.target} target="_blank" className="block pb-6 mb-2">
+          <div className="group-hover:font-bold">
+            <h1 className="uppercase underline font-medium">
+              {title + ' ->'}
+            </h1>
+            {tags && <CardTags tags={tags} />}
           </div>
-        )}
-      </a>
+          {description && <CardDescription description={description} />}
+        </a>
+      ) : (
+        <div className="block pb-8">
+          <h1 className="uppercase font-medium">{title}</h1>
+          {tags && <CardTags tags={tags} />}
+          {description && <CardDescription description={description} />}
+        </div>
+      )}
 
       {links && <CardLinks {...links} />}
     </div>
+  );
+}
+
+function CardDescription({ description }: CardDescriptionProps) {
+  const paragraphs = description.split('\n');
+
+  return (
+    <div className="mt-4 first:mt-0 text-sm font-sans">
+      {paragraphs.map((p, index) => (
+        <p key={index} className="mt-2">
+          {p}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function CardTags({ tags }: CardTagsProps) {
+  return (
+    <ul>
+      {tags.map((tag, index) => (
+        <li
+          key={index}
+          className="inline-block uppercase text-xs font-base mr-3 last:mr-0"
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -41,38 +61,49 @@ function CardLinks(props: CardLinksProps) {
   const { repo, assets } = props;
 
   return (
-    <ul className="text-sm mt-auto">
-      {assets &&
-        assets.map(({ href, description }) => (
-          <li key={description}>
-            <a
-              className="text-blue-600 underline font-['Arimo']"
-              href={href}
-              target="_blank"
-            >
-              {description}
-            </a>
-          </li>
-        ))}
+    <>
+      {assets && (
+        <ul className="text-sm mt-auto mb-4">
+          {assets.map(({ href, description }) => (
+            <li key={description}>
+              <a
+                className="text-blue-600 underline font-['Arimo']"
+                href={href}
+                target="_blank"
+              >
+                {description}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {repo && (
-        <li className="mt-4">
-          <img
-            src="/github-mark.svg"
-            alt=""
-            className="inline-block align-middle h-4 mr-2"
-          />
+        <>
           <a
-            className="text-blue-600 underline text-xs"
+            className="inline text-blue-600 underline text-xs"
             href={repo}
             target="_blank"
           >
+            <img
+              src="/github-mark.svg"
+              alt=""
+              className="inline h-4 w-4 mr-2"
+            />
             {repo}
           </a>
-        </li>
+        </>
       )}
-    </ul>
+    </>
   );
+}
+
+interface CardDescriptionProps {
+  description: string;
+}
+
+interface CardTagsProps {
+  tags: string[];
 }
 
 interface CardLinksProps {
