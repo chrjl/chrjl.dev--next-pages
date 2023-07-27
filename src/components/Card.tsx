@@ -7,10 +7,8 @@ export default function Card(props: CardProps) {
     <div className="group border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
       {links.target ? (
         <a href={links.target} target="_blank" className="block pb-6 mb-2">
-          <div className="group-hover:font-bold">
-            <h1 className="uppercase underline font-medium">
-              {title + ' ->'}
-            </h1>
+          <div className="font-medium group-hover:font-bold">
+            <h1 className="uppercase underline">{title + ' ->'}</h1>
             {tags && <CardTags tags={tags} />}
           </div>
           {description && <CardDescription description={description} />}
@@ -32,7 +30,7 @@ function CardDescription({ description }: CardDescriptionProps) {
   const paragraphs = description.split('\n');
 
   return (
-    <div className="mt-4 first:mt-0 text-sm font-sans">
+    <div className="mt-4 first:mt-0 text-sm font-content">
       {paragraphs.map((p, index) => (
         <p key={index} className="mt-2">
           {p}
@@ -48,7 +46,7 @@ function CardTags({ tags }: CardTagsProps) {
       {tags.map((tag, index) => (
         <li
           key={index}
-          className="inline-block uppercase text-xs font-base mr-3 last:mr-0"
+          className="inline-block uppercase text-xs mr-3 last:mr-0"
         >
           {tag}
         </li>
@@ -67,7 +65,7 @@ function CardLinks(props: CardLinksProps) {
           {assets.map(({ href, description }) => (
             <li key={description}>
               <a
-                className="text-blue-600 underline font-['Arimo']"
+                className="text-blue-600 underline"
                 href={href}
                 target="_blank"
               >
@@ -81,7 +79,7 @@ function CardLinks(props: CardLinksProps) {
       {repo && (
         <>
           <a
-            className="inline text-blue-600 underline text-xs"
+            className="inline text-blue-600 underline text-xs group-hover:font-bold"
             href={repo}
             target="_blank"
           >

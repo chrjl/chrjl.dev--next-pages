@@ -3,7 +3,7 @@ import Card from '../components/Card';
 
 export default function Page() {
   return (
-    <div className="container max-w-screen-sm mx-auto my-8 whitespace-pre-line">
+    <div className="container max-w-screen-sm mx-auto my-8 whitespace-pre-line font-sans">
       <header className="my-8">
         <h1 className="mb-4 text-4xl text-center font-bold">Christopher Lee</h1>
         <h2 className="text-xl text-center font-bold">
