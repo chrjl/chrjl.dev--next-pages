@@ -1,7 +1,7 @@
-import portfolio from '../../public/portfolio.json';
+import fs from 'fs';
 import Card from '../components/Card';
 
-export default function Page() {
+export default function Page({ portfolio }) {
   return (
     <div className="container max-w-screen-sm mx-auto my-8 whitespace-pre-line font-sans">
       <header className="my-8">
@@ -36,4 +36,13 @@ export default function Page() {
       </ul>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const portfolio = fs.readFileSync('./public/portfolio.json', 'utf-8');
+  return {
+    props: {
+      portfolio: JSON.parse(portfolio),
+    },
+  };
 }
