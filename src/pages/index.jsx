@@ -4,12 +4,15 @@ import Card from '../components/Card';
 export default function Page({ portfolio }) {
   return (
     <div className="container max-w-screen-sm mx-auto my-8 whitespace-pre-line font-sans">
-      <header className="my-8">
-        <h1 className="mb-4 text-4xl text-center font-bold">Christopher Lee</h1>
-        <h2 className="text-xl text-center font-bold">
-          JavaScript and Cloud Developer
+      <header className="my-8 text-center">
+        <h1 className="mb-4 text-4xl font-bold">Christopher Lee</h1>
+        <h2 className="text-xl font-semibold">
+          JavaScript Developer
+          <div className="text-base font-medium">
+            AWS Certified Solutions Architect Associate
+          </div>
         </h2>
-        <h3 className="text-center text-sm">
+        <h3 className="text-sm mt-2">
           Los Angeles, California
           <span className="px-4">|</span>
           <a
