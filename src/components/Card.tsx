@@ -8,7 +8,7 @@ export default function Card(props: CardProps) {
   return (
     <div className="group border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
       {links.target ? (
-        <a href={links.target} target="_blank" className="block">
+        <a href={links.target} target="_blank" className="block text-black">
           <div className="font-medium group-hover:font-bold">
             <h1 className="uppercase underline">{title + ' ->'}</h1>
 
@@ -73,7 +73,7 @@ function CardTags({ tags }: CardTagsProps) {
 function CardLinksAssets({ assets }: CardLinksAssetsProps) {
   return assets.map(({ href, description }) => (
     <li key={description} className="mt-1">
-      <a className="text-blue-600 underline" href={href} target="_blank">
+      <a href={href} target="_blank">
         {description}
       </a>
     </li>
@@ -86,7 +86,7 @@ function CardLinksRepos({ repos }: CardLinksReposProps) {
   return repos.map((href, index) => (
     <a
       key={index}
-      className="block text-blue-600 underline text-xs group-hover:font-bold"
+      className="block text-xs group-hover:font-bold"
       href={href}
       target="_blank"
     >

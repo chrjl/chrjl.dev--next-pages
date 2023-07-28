@@ -1,3 +1,13 @@
 @tailwind base;
+
+@layer base {
+  a {
+    @apply text-blue-600 underline;
+  }
+  code {
+    @apply text-[0.95em] font-semibold;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
