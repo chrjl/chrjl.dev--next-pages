@@ -1,31 +1,47 @@
 # Next.js with Pages Router
 
-Mount or copy a `portfolio.json` to `public/portfolio.json`, then generate a static export. Default out directory is `out/`.
+Mount or copy content to `src/posts`:
+
+- `index.json` (required) array that lists the filenames to be published and/or contains (inline) properly typed project objects.
+- Markdown `content` with properly-typed frontmatter `data`.
+
+Then generate a static export (default out directory is `out/`).
 
 ```console
 $ npx next build
 $ npx next export [-o $OUTDIR]
 ```
 
-`portfolio.json` should be an array of project objects that have properly typed fields of interest. The current state of the project checks the schema of `portfolio.json` when checking Prop types of Components rendered with data from the file.
+The current state of the project does not check the schema of `portfolio` objects until typechecking of Prop types of Components rendered with data from the file.
 
 ```ts
+type Posts = (string | Project)[]
 type Portfolio = Project[];
+```
 
+```ts
 interface Project {
-  title: string;
-  description?: string;
-  tags?: string[];
-  links?: {
-    repo?: string;
-    assets?: { description: string; href: string }[];
-    target?: string;
+  content?: string;
+  data: {
+    title: string;
+    tags?: string[];
+    links?: Link[];
+  };
+}
+
+interface Link {
+  repo?: string[];
+  target?: string;
+  assets?: {
+    description: string;
+    href: string;
+  }[];
 }
 ```
 
 ## Docker Compose dev server
 
-The provided Docker Compose file mounts a local file to `public/portfolio.json` and runs the Next.js dev server (`npx next dev`) behind an externally managed Traefik reverse proxy via an externally managed network.
+The provided Docker Compose file mounts the `posts/` directory to `src/posts` and runs the Next.js dev server (`npx next dev`) behind an externally managed Traefik reverse proxy via an externally managed network.
 
 To run the Compose service without the Traefik reverse proxy:
 

@@ -1,6 +1,11 @@
 # Next.js with Pages Router
 
-Mount or copy a `portfolio.json` to `public/portfolio.json`. More about content sources: [[content]].
+Mount or copy a `index.json` and optionally a collection of markdown posts to `src/posts`.
+
+> **Note:**
+> More about content sources and data types: [[content]].
+>
+> Metadata should be included in the frontmatter of markdown posts. Content should be included in the `content` field of `index.json` component objects.
 
 Then, generate a static export. Default out directory is `out/`.
 
@@ -17,7 +22,7 @@ $ npx next dev
 
 ## Docker Compose dev server
 
-The provided Docker Compose file mounts a local file to `public/portfolio.json` and runs the Next.js dev server (`npx next dev`) behind an externally managed Traefik reverse proxy via an externally managed network.
+The provided Docker Compose file mounts the `posts/` directory to `src/posts` and runs the Next.js dev server (`npx next dev`) behind an externally managed Traefik reverse proxy via an externally managed network.
 
 To run the Compose service without the Traefik reverse proxy:
 

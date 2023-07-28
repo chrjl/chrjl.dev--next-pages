@@ -1,5 +1,12 @@
 # Unsorted notes
 
+In progress:
+
+- [x] build(Card): support loading `data.title` as a two-component array, signifying a preferred line break point. It works by breaking up the title into (line-breakable) inline-block spans. Functionality will probably be buggy if more than one break point is specified, so maximum length of the array is enforced at 2 (`[string, string?]` tuple).
+- [x] build(Page): instead of hard-coding file list into the Page component's static props, load the file list from JSON. Modify the schema of `projects.json`: it either outputs a string filename of a post, or an {data, content}-formatted object. The order of cards in `projects.json` is preserved.
+  - [x] update sample file
+  - [x] rename to posts.json
+
 ## Build
 
 Install Next.js (`next`, `react`, `react-dom`) and setup a project using the Pages Router (`/pages/index.tsx`).
