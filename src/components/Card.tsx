@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 
 export default function Card(props: CardProps) {
-  const { title, description, tags, links } = props;
+  const { data, content } = props;
+  const { title, tags, links } = data;
 
   return (
     <div className="group border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
@@ -16,12 +18,10 @@ export default function Card(props: CardProps) {
               </ul>
             )}
           </div>
-          {description && <CardDescription description={description} />}
         </a>
       ) : (
         <div className="block">
           <h1 className="uppercase font-medium">{title}</h1>
-          {description && <CardDescription description={description} />}
 
           {tags && (
             <ul className="text-xs mt-2">
@@ -31,20 +31,12 @@ export default function Card(props: CardProps) {
         </div>
       )}
 
-    </div>
-  );
-}
+      {content && (
+        <div className="mt-6 [&>*]:mt-2 whitespace-normal text-sm font-content">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
+      )}
 
-function CardDescription({ description }: CardDescriptionProps) {
-  const paragraphs = description.split('\n');
-
-  return (
-    <div className="mt-4 first:mt-0 text-sm font-content">
-      {paragraphs.map((p, index) => (
-        <p key={index} className="mt-2">
-          {p}
-        </p>
-      ))}
       {links && (
         <div className="mt-8 group-hover:font-bold">
           {links.assets && (
@@ -88,10 +80,6 @@ function CardLinksAssets({ assets }: CardLinksAssetsProps) {
   ));
 }
 
-interface CardDescriptionProps {
-  description: string;
-}
-
 function CardLinksRepos({ repos }: CardLinksReposProps) {
   if (typeof repos === 'string') repos = [repos];
 
@@ -120,12 +108,17 @@ interface CardLinksAssetsProps {
 }
 
 interface CardProps {
-  title: string;
-  description?: string;
-  tags?: string[];
-  links?: {
-    repo?: string;
-    assets?: { description: string; href: string }[];
-    target?: string;
+  data: {
+    title: string;
+    tags?: string[];
+    links?: {
+      repo?: string;
+      target?: string;
+      assets?: {
+        description: string;
+        href: string;
+      }[];
+    };
   };
+  content?: string;
 }

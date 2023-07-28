@@ -1,0 +1,14 @@
+[
+  {
+    "data": {
+      "title": "Sample project",
+      "tags": ["Keyword 1", "Keyword 2"],
+      "links": {
+        "target": "#",
+        "assets": [{ "description": "This page", "href": "#" }],
+        "repo": "http://github.com/chrjl/chrjl.dev--next-pages"
+      }
+    },
+    "content": "Sample description"
+  }
+]

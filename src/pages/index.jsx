@@ -32,7 +32,7 @@ export default function Page({ portfolio }) {
 
       <ul>
         {portfolio.map((project) => (
-          <li key={project.title} className="m-8">
+          <li key={project.data.title} className="m-8">
             <Card {...project} />
           </li>
         ))}
@@ -42,7 +42,8 @@ export default function Page({ portfolio }) {
 }
 
 export async function getStaticProps() {
-  const portfolio = fs.readFileSync('./public/portfolio.json', 'utf-8');
+  const portfolio = fs.readFileSync('./src/posts/projects.json', 'utf-8');
+
   return {
     props: {
       portfolio: JSON.parse(portfolio),

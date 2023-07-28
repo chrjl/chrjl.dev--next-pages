@@ -14,8 +14,8 @@ services:
         source: .
         target: ${DOCKER_WORKDIR}
       - type: bind
-        source: ${DOCKER_PORTFOLIO_JSON}
-        target: ${DOCKER_WORKDIR}/public/portfolio.json
+        source: ${DOCKER_PORTFOLIO_POSTS}
+        target: ${DOCKER_WORKDIR}/src/posts
     networks:
       - proxy
     working_dir: ${DOCKER_WORKDIR}
