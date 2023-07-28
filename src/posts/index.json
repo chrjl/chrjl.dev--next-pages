@@ -1,0 +1,13 @@
+[
+  "sample-project-1.md",
+  {
+    "data": {
+      "title": ["Sample project", "2"],
+      "tags": ["Keyword 1", "Keyword 2"],
+      "links": {
+        "assets": [{ "description": "This page, as an asset", "href": "#" }],
+        "repo": "http://github.com/chrjl/chrjl.dev--next-pages"
+      }
+    }
+  }
+]

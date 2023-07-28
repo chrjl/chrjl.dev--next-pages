@@ -51,15 +51,11 @@ export default function Page({ portfolio }) {
 }
 
 export async function getStaticProps() {
-  const postNames = [
-    'portfolio-website.md',
-    'react-resume.md',
-    'refman-server.md',
-  ];
+  const posts = JSON.parse(fs.readFileSync('./src/posts/index.json', 'utf-8'));
 
-  const posts = postNames
-    .map((fileName) => path.join(process.cwd(), 'src/posts', fileName))
-    .map((filePath) => {
+  const portfolio = posts.map((post) => {
+    if (typeof post === 'string') {
+      const filePath = path.join(process.cwd(), 'src/posts', post);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const matterResult = matter(fileContent);
 
@@ -68,13 +64,37 @@ export async function getStaticProps() {
         content: matterResult.content,
         isEmpty: matterResult.isEmpty,
       };
-    });
-
-  const portfolio = fs.readFileSync('./src/posts/projects.json', 'utf-8');
+    } else {
+      return post;
+    }
+  });
 
   return {
     props: {
-      portfolio: [...posts, ...JSON.parse(portfolio)],
+      portfolio,
     },
   };
+
+  /*
+  type Posts = (string | Project)[]
+  type Portfolio = Project[]
+
+  interface Project {
+    data: {
+      title: string | [string, string?];
+      tags?: string[];
+      links?: Links;
+    },
+    content: string,    
+  }
+  
+  interface Links {
+    target: string;
+    repo: string | string[];
+    assets: {
+      description: string,
+      href: string,
+    }[]
+  }
+  */
 }
