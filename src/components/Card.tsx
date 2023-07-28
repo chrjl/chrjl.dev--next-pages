@@ -6,30 +6,20 @@ export default function Card(props: CardProps) {
   const { title, tags, links } = data;
 
   return (
-    <div className="group border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
-      {links.target ? (
-        <a href={links.target} target="_blank" className="block text-black">
-          <div className="font-medium group-hover:font-bold">
-            <h1 className="uppercase underline">{title + ' ->'}</h1>
-
-            {tags && (
-              <ul className="text-xs mt-2">
-                <CardTags tags={tags} />
-              </ul>
-            )}
-          </div>
-        </a>
-      ) : (
-        <div className="block">
-          <h1 className="uppercase font-medium">{title}</h1>
-
-          {tags && (
-            <ul className="text-xs mt-2">
-              <CardTags tags={tags} />
-            </ul>
-          )}
-        </div>
-      )}
+    <div className="group text-lg border-solid border-black border-2 p-4 h-full hover:bg-gray-200">
+      <div className="text-center sm:text-left font-medium uppercase">
+        {links.target ? (
+          <a
+            href={links.target}
+            target="_blank"
+            className="block group-hover:font-bold text-black [&>h1>*]:underline"
+          >
+            <CardTitle title={title} tags={tags} />
+          </a>
+        ) : (
+          <CardTitle title={title} tags={tags} />
+        )}
+      </div>
 
       {content && (
         <div className="mt-6 [&>*]:mt-2 whitespace-normal text-sm font-content">
@@ -62,12 +52,36 @@ export default function Card(props: CardProps) {
   );
 }
 
-function CardTags({ tags }: CardTagsProps) {
-  return tags.map((tag, index) => (
-    <li key={index} className="inline-block uppercase mr-3 last:mr-0">
-      {tag}
-    </li>
-  ));
+function CardTitle({ title, tags }: CardTitleProps) {
+  // check type and build title element or fragment
+  const titleFrag = Array.isArray(title) ? (
+    title.map((segment, index) => (
+      <span
+        key={index}
+        className="inline-block after:content-['_'] last:after:content-['_->'] whitespace-pre-wrap"
+      >
+        {segment}
+      </span>
+    ))
+  ) : (
+    <span className="after:content-['_->'] whitespace-pre-wrap">
+      {title}
+    </span>      
+  );
+
+  return (
+    <>
+      <h1 className="leading-snug">{titleFrag}</h1>
+
+      <ul className="text-xs mt-3">
+        {tags.map((tag, index) => (
+          <li key={index} className="inline-block uppercase mr-3 last:mr-0">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 function CardLinksAssets({ assets }: CardLinksAssetsProps) {
@@ -95,8 +109,9 @@ function CardLinksRepos({ repos }: CardLinksReposProps) {
   ));
 }
 
-interface CardTagsProps {
-  tags: string[];
+interface CardTitleProps {
+  title: string | [string, string?];
+  tags?: string[];
 }
 
 interface CardLinksReposProps {
@@ -109,7 +124,7 @@ interface CardLinksAssetsProps {
 
 interface CardProps {
   data: {
-    title: string;
+    title: string | [string, string?];
     tags?: string[];
     links?: {
       repo?: string;

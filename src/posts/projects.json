@@ -1,7 +1,7 @@
 [
   {
     "data": {
-      "title": "Sample project",
+      "title": "Sample project 1",
       "tags": ["Keyword 1", "Keyword 2"],
       "links": {
         "target": "#",
@@ -10,5 +10,15 @@
       }
     },
     "content": "Sample description"
+  },
+  {
+    "data": {
+      "title": ["Sample project", "2"],
+      "tags": ["Keyword 1", "Keyword 2"],
+      "links": {
+        "target": "#",
+        "repo": "http://github.com/chrjl/chrjl.dev--next-pages"
+      }
+    }
   }
 ]
