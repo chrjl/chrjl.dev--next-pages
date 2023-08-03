@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        content: ['var(--font-arimo)'],
-        mono: ['var(--font-cousine)'],
+        sans: ['Inter Variable'],
+        content: ['Arimo'],
+        mono: ['Cousine'],
       },
     },
   },

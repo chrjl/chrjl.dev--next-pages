@@ -6,6 +6,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.0.5",
+    "@fontsource/arimo": "^5.0.6",
+    "@fontsource/cousine": "^5.0.6",
     "next": "^13.4.12",
     "postcss": "^8.4.27",
     "postcss-nesting": "^12.0.0",
