@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+
+import GithubMark from '../assets/GithubMark';
 
 export default function Card(props: CardProps) {
   const { data, content } = props;
@@ -36,11 +37,7 @@ export default function Card(props: CardProps) {
           )}
           {links.repo && (
             <div className="flex flex-row items-center mt-8">
-              <img
-                src="/github-mark.svg"
-                alt=""
-                className="inline h-4 w-4 mr-2"
-              />
+              <GithubMark className="inline h-4 w-4 mr-2" />
               <div>
                 <CardLinksRepos repos={links.repo} />
               </div>

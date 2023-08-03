@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 
 import Head from 'next/head';
 import Card from '../components/Card';
+import GithubMark from '../assets/GithubMark';
 
 export default function Page({ portfolio }) {
   return (
@@ -28,11 +29,7 @@ export default function Page({ portfolio }) {
               href="https://github.com/chrjl"
               target="_blank"
             >
-              <img
-                src="/github-mark.svg"
-                alt=""
-                className="inline-block align-middle h-4 mr-1"
-              />
+              <GithubMark className="inline-block h-4 mr-1" />
               chrjl
             </a>
           </h3>
