@@ -12,7 +12,7 @@ export default function Card(props: CardProps) {
           <a
             href={links.target}
             target="_blank"
-            className="block group-hover:font-bold text-black [&>h1>*]:underline"
+            className="block font-semibold group-hover:font-bold text-black [&>h1>*]:underline [&>h1]:after:content-['_->'] "
           >
             <CardTitle title={title} tags={tags} />
           </a>
@@ -58,15 +58,13 @@ function CardTitle({ title, tags }: CardTitleProps) {
     title.map((segment, index) => (
       <span
         key={index}
-        className="inline-block after:content-['_'] last:after:content-['_->'] whitespace-pre-wrap"
+        className="inline-block after:content-['_'] last:after:content-none whitespace-pre-wrap"
       >
         {segment}
       </span>
     ))
   ) : (
-    <span className="after:content-['_->'] whitespace-pre-wrap">
-      {title}
-    </span>      
+    <span className="inline-block whitespace-pre-wrap">{title}</span>
   );
 
   return (
